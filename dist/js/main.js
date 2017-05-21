@@ -60,32 +60,39 @@ var GameObject = (function () {
     GameObject.prototype.draw = function () {
         this.div.style.transform = "translate(" + this.x + "px," + this.y + "px)";
     };
+    GameObject.prototype.update = function (x, y) {
+        this.x = x;
+        this.y = y;
+    };
     return GameObject;
 }());
+var Kart = (function (_super) {
+    __extends(Kart, _super);
+    function Kart(parent, x, y, width, height) {
+        return _super.call(this, "kart", parent, x, y, width, height) || this;
+    }
+
+    return Kart;
+}(GameObject));
 var Player = (function (_super) {
     __extends(Player, _super);
     function Player(parent) {
         var _this = _super.call(this, "player", parent, 100, 250, 93, 99) || this;
         _this.kart = new Kart(_this.div, 100, 250, 93, 99);
         _this.div.classList.add("mario");
+        _this.setSpeed(5);
         return _this;
     }
-    Player.prototype.getSpeed = function (speed) {
+
+    Player.prototype.setSpeed = function (speed) {
         this.speed = speed;
     };
-    Player.prototype.setSpeed = function () {
+    Player.prototype.getSpeed = function () {
         return this.speed;
     };
     Player.prototype.move = function () {
         this.draw();
     };
     return Player;
-}(GameObject));
-var Kart = (function (_super) {
-    __extends(Kart, _super);
-    function Kart(parent, x, y, width, height) {
-        return _super.call(this, "kart", parent, x, y, width, height) || this;
-    }
-    return Kart;
 }(GameObject));
 //# sourceMappingURL=main.js.map

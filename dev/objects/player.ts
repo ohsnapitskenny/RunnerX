@@ -14,24 +14,27 @@ class Player extends GameObject {
 
     constructor(parent: HTMLElement) {
         super("player", parent, 100, 250, 93, 99);
-
         this.kart = new Kart(this.div,100,250,93,99);
 
         //TODO: Set Sprite so player can choose which character he/she wants to play. Now hardcoded Mario Sprite.
         this.div.classList.add("mario");
+
+        //Set Speed
+        this.setSpeed(5);
     }
 
     //Getter & Setters
-    public getSpeed(speed: number): void {
+    public setSpeed(speed: number): void {
         this.speed = speed;
     }
 
-    public setSpeed(): number {
+    public getSpeed(): number {
         return this.speed;
     }
 
     //Methods
     public move() {
+        // this.x += this.getSpeed();
         this.draw();
     }
 }

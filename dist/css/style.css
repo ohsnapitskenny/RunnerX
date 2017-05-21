@@ -1,29 +1,46 @@
+/* main Tags*/
+
+container {
+    height: 600px;
+    left: 50%;
+    overflow: hidden;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+}
+
 body {
+    animation: scrollingBg 3.4s linear infinite;
     background-color: #70CF51;
-    font-family: Arial, Helvetica, sans-serif;
-    overflow:hidden;
-    margin:0px; padding:0px;
     background-image: url(../images/grass.png);
     background-size: cover;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0px;
+    padding: 0px;
+    overflow: hidden;
 }
 
 body * {
-    position: absolute;
-    display: block;
-    margin:0px; padding:0px;
-    box-sizing: border-box;
     background-repeat: no-repeat;
+    box-sizing: border-box;
+    display: block;
+    margin: 0px;
+    padding: 0px;
+    position: absolute;
+}
+
+player {
+    height: 99px;
+    width: 93px;
 }
 
 kart {
     background-image: url(../images/kart.png);
-    width:93px; height: 99px;
+    height: 99px;
+    width: 93px;
 }
 
-player {
-    width:93px; height: 99px;
-}
-
+/* Classes */
 .mario {
     background-image: url(../images/mario.png);
 }
@@ -38,4 +55,14 @@ player {
 
 .toad {
     background-image: url(../images/toad.png);
+}
+
+/* Animation */
+@keyframes scrollingBg {
+    0% {
+        transform: translate(0px, 100px);
+    }
+    100% {
+        transform: translate(0px, 200px);
+    }
 }

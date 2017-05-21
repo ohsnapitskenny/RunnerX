@@ -29,4 +29,9 @@ class GameObject {
     public draw(): void {
         this.div.style.transform = "translate(" + this.x + "px," + this.y + "px)";
     }
+
+    public update(x: number, y: number): void {
+        this.x = x;
+        this.y = y;
+    }
 }
