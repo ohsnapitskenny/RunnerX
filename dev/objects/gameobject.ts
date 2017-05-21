@@ -23,7 +23,6 @@ class GameObject {
         //Set size values in object
         this.width = width;
         this.height = height;
-
     }
 
     //Display object on screen

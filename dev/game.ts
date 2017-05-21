@@ -30,6 +30,7 @@ class Game {
     }
 
     private gameLoop() {
+        this.player.move();
         requestAnimationFrame(() => this.gameLoop());
     }
 }
