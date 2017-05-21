@@ -3,8 +3,7 @@ class Game {
     private static gameInstance: Game;
 
     //Objects
-    private car: Car;
-    private block: Block;
+
 
     //Properties
     private score: number;
@@ -24,16 +23,12 @@ class Game {
         let container = document.getElementById("container");
 
         //Create GameObjects
-        this.car = new Car(container);
-        this.block = new Block(container);
 
         //Loop gameLoop function
         requestAnimationFrame(() => this.gameLoop());
     }
 
     private gameLoop() {
-        this.car.draw();
-        this.block.draw();
         requestAnimationFrame(() => this.gameLoop());
     }
 }
