@@ -3,7 +3,7 @@ class Game {
     private static gameInstance: Game;
 
     //Objects
-
+    private player:Player;
 
     //Properties
     private score: number;
@@ -23,6 +23,7 @@ class Game {
         let container = document.getElementById("container");
 
         //Create GameObjects
+        this.player = new Player(container);
 
         //Loop gameLoop function
         requestAnimationFrame(() => this.gameLoop());

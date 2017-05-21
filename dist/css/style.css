@@ -1,0 +1,26 @@
+body {
+    background-color: #70CF51;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow:hidden;
+    margin:0px; padding:0px;
+    background-image: url(../images/grass.png);
+    background-size: cover;
+}
+
+body * {
+    position: absolute;
+    display: block;
+    margin:0px; padding:0px;
+    box-sizing: border-box;
+    background-repeat: no-repeat;
+}
+
+kart {
+    background-image: url(../images/kart.png);
+    width:93px; height: 99px;
+}
+
+driver {
+    background-image: url(../images/mario.png);
+    width:93px; height: 99px;
+}
