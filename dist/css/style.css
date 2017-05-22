@@ -1,4 +1,20 @@
-/* main Tags*/
+/* main Tags */
+body {
+    background-color: #666;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+
+body * {
+    background-repeat: no-repeat;
+    box-sizing: border-box;
+    display: block;
+    margin: 0px;
+    padding: 0px;
+    position: absolute;
+}
 
 container {
     height: 600px;
@@ -9,24 +25,12 @@ container {
     width: 800px;
 }
 
-body {
-    animation: scrollingBg 3.4s linear infinite;
-    background-color: #70CF51;
+grass {
+    animation: scrollingBg 8s linear infinite;
     background-image: url(../images/grass.png);
-    background-size: cover;
-    font-family: Arial, Helvetica, sans-serif;
-    margin: 0px;
-    padding: 0px;
-    overflow: hidden;
-}
-
-body * {
-    background-repeat: no-repeat;
-    box-sizing: border-box;
-    display: block;
-    margin: 0px;
-    padding: 0px;
-    position: absolute;
+    background-repeat: repeat-x;
+    height: 600px;
+    width: 1600px;
 }
 
 player {
@@ -60,9 +64,9 @@ kart {
 /* Animation */
 @keyframes scrollingBg {
     0% {
-        transform: translate(0px, 100px);
+        transform: translate(0px, 0px);
     }
     100% {
-        transform: translate(0px, 200px);
+        transform: translate(-800px, 0px);
     }
 }

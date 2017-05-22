@@ -18,7 +18,6 @@ var Game = (function () {
     Game.getInstance = function () {
         if (!Game.gameInstance) {
             Game.gameInstance = new Game();
-            console.log("Created GameInstance");
         }
         return Game.gameInstance;
     };
@@ -71,7 +70,6 @@ var Kart = (function (_super) {
     function Kart(parent, x, y, width, height) {
         return _super.call(this, "kart", parent, x, y, width, height) || this;
     }
-
     return Kart;
 }(GameObject));
 var Player = (function (_super) {
@@ -79,20 +77,63 @@ var Player = (function (_super) {
     function Player(parent) {
         var _this = _super.call(this, "player", parent, 100, 250, 93, 99) || this;
         _this.kart = new Kart(_this.div, 100, 250, 93, 99);
+        _this.behavior = new Driving(_this);
         _this.div.classList.add("mario");
-        _this.setSpeed(5);
+        _this.setSpeed(2);
         return _this;
     }
-
     Player.prototype.setSpeed = function (speed) {
         this.speed = speed;
     };
     Player.prototype.getSpeed = function () {
         return this.speed;
     };
+    Player.prototype.setY = function (yPos) {
+        this.y = yPos;
+    };
+    Player.prototype.getY = function () {
+        return this.y;
+    };
     Player.prototype.move = function () {
-        this.draw();
+        this.behavior.execute();
     };
     return Player;
 }(GameObject));
+var Driving = (function () {
+    function Driving(p) {
+        var _this = this;
+        this.moveUp = "ArrowUp";
+        this.moveDown = "ArrowDown";
+        this.player = p;
+        window.addEventListener("keydown", function (e) {
+            return _this.onKeyDown(e);
+        });
+    }
+
+    Driving.prototype.execute = function () {
+        this.player.draw();
+    };
+    Driving.prototype.onKeyDown = function (e) {
+        var yPosition;
+        if (e.key === this.moveUp && this.player.behavior instanceof Driving) {
+            yPosition = this.player.getY() - 3;
+        }
+        else if (e.key === this.moveDown && this.player.behavior instanceof Driving) {
+            yPosition = this.player.getY() + 3;
+        }
+        else {
+            return;
+        }
+        this.player.setY(yPosition);
+        this.execute();
+    };
+    Driving.prototype.crashed = function () {
+        var _this = this;
+        window.removeEventListener("keydown", function (e) {
+            return _this.onKeyDown(e);
+        });
+        this.player.behavior = new Crashed(this);
+    };
+    return Driving;
+}());
 //# sourceMappingURL=main.js.map

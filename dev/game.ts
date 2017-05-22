@@ -12,7 +12,6 @@ class Game {
     public static getInstance() {
         if (!Game.gameInstance) {
             Game.gameInstance = new Game();
-            console.log("Created GameInstance");
         }
         return Game.gameInstance;
     }
