@@ -132,7 +132,7 @@ var Driving = (function () {
         window.removeEventListener("keydown", function (e) {
             return _this.onKeyDown(e);
         });
-        this.player.behavior = new Crashed(this);
+        this.player.behavior = new Crashed(this.player);
     };
     return Driving;
 }());
@@ -140,7 +140,6 @@ var Crashed = (function () {
     function Crashed(p) {
         this.player = p;
     }
-
     Crashed.prototype.execute = function () {
     };
     return Crashed;
