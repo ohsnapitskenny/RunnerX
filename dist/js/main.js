@@ -104,22 +104,22 @@ var Driving = (function () {
         var _this = this;
         this.moveUp = "ArrowUp";
         this.moveDown = "ArrowDown";
+        this.moveSpeed = 3;
         this.player = p;
         window.addEventListener("keydown", function (e) {
             return _this.onKeyDown(e);
         });
     }
-
     Driving.prototype.execute = function () {
         this.player.draw();
     };
     Driving.prototype.onKeyDown = function (e) {
         var yPosition;
         if (e.key === this.moveUp && this.player.behavior instanceof Driving) {
-            yPosition = this.player.getY() - 3;
+            yPosition = this.player.getY() - this.moveSpeed;
         }
         else if (e.key === this.moveDown && this.player.behavior instanceof Driving) {
-            yPosition = this.player.getY() + 3;
+            yPosition = this.player.getY() + this.moveSpeed;
         }
         else {
             return;
@@ -135,5 +135,14 @@ var Driving = (function () {
         this.player.behavior = new Crashed(this);
     };
     return Driving;
+}());
+var Crashed = (function () {
+    function Crashed(p) {
+        this.player = p;
+    }
+
+    Crashed.prototype.execute = function () {
+    };
+    return Crashed;
 }());
 //# sourceMappingURL=main.js.map
