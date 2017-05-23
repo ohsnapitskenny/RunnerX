@@ -96,17 +96,17 @@ var GameObject = (function () {
     function GameObject(element, parent, x, y, width, height) {
         this.div = document.createElement(element);
         parent.appendChild(this.div);
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
+        this.setX(x);
+        this.setY(y);
+        this.setWidth(width);
+        this.setHeight(height);
     }
     GameObject.prototype.draw = function () {
         this.div.style.transform = "translate(" + this.x + "px," + this.y + "px)";
     };
     GameObject.prototype.update = function (x, y) {
-        this.x = x;
-        this.y = y;
+        this.setX(x);
+        this.setY(y);
     };
     GameObject.prototype.getX = function () {
         return this.x;

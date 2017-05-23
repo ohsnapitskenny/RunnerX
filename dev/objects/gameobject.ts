@@ -13,12 +13,11 @@ class GameObject {
         parent.appendChild(this.div);
 
         //Set position values in object
-        this.x = x;
-        this.y = y;
-
+        this.setX(x);
+        this.setY(y);
         //Set size values in object
-        this.width = width;
-        this.height = height;
+        this.setWidth(width);
+        this.setHeight(height);
     }
 
     //Display object on screen
@@ -27,12 +26,11 @@ class GameObject {
     }
 
     public update(x: number, y: number): void {
-        this.x = x;
-        this.y = y;
+        this.setX(x);
+        this.setY(y);
     }
 
     // Getters & Setters
-
     public getX(): number {
         return this.x;
     }
