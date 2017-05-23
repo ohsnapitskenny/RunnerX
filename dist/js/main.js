@@ -47,6 +47,53 @@ var Utils = (function () {
     };
     return Utils;
 }());
+var Crashed = (function () {
+    function Crashed(p) {
+        this.player = p;
+    }
+
+    Crashed.prototype.execute = function () {
+    };
+    return Crashed;
+}());
+var Driving = (function () {
+    function Driving(p) {
+        var _this = this;
+        this.moveUp = "ArrowUp";
+        this.moveDown = "ArrowDown";
+        this.moveSpeed = 3;
+        this.player = p;
+        window.addEventListener("keydown", function (e) {
+            return _this.onKeyDown(e);
+        });
+    }
+
+    Driving.prototype.execute = function () {
+        this.player.draw();
+    };
+    Driving.prototype.onKeyDown = function (e) {
+        var yPosition;
+        if (e.key === this.moveUp && this.player.behavior instanceof Driving) {
+            yPosition = this.player.getY() - this.moveSpeed;
+        }
+        else if (e.key === this.moveDown && this.player.behavior instanceof Driving) {
+            yPosition = this.player.getY() + this.moveSpeed;
+        }
+        else {
+            return;
+        }
+        this.player.setY(yPosition);
+        this.execute();
+    };
+    Driving.prototype.crashed = function () {
+        var _this = this;
+        window.removeEventListener("keydown", function (e) {
+            return _this.onKeyDown(e);
+        });
+        this.player.behavior = new Crashed(this.player);
+    };
+    return Driving;
+}());
 var GameObject = (function () {
     function GameObject(element, parent, x, y, width, height) {
         this.div = document.createElement(element);
@@ -99,49 +146,4 @@ var Player = (function (_super) {
     };
     return Player;
 }(GameObject));
-var Driving = (function () {
-    function Driving(p) {
-        var _this = this;
-        this.moveUp = "ArrowUp";
-        this.moveDown = "ArrowDown";
-        this.moveSpeed = 3;
-        this.player = p;
-        window.addEventListener("keydown", function (e) {
-            return _this.onKeyDown(e);
-        });
-    }
-    Driving.prototype.execute = function () {
-        this.player.draw();
-    };
-    Driving.prototype.onKeyDown = function (e) {
-        var yPosition;
-        if (e.key === this.moveUp && this.player.behavior instanceof Driving) {
-            yPosition = this.player.getY() - this.moveSpeed;
-        }
-        else if (e.key === this.moveDown && this.player.behavior instanceof Driving) {
-            yPosition = this.player.getY() + this.moveSpeed;
-        }
-        else {
-            return;
-        }
-        this.player.setY(yPosition);
-        this.execute();
-    };
-    Driving.prototype.crashed = function () {
-        var _this = this;
-        window.removeEventListener("keydown", function (e) {
-            return _this.onKeyDown(e);
-        });
-        this.player.behavior = new Crashed(this.player);
-    };
-    return Driving;
-}());
-var Crashed = (function () {
-    function Crashed(p) {
-        this.player = p;
-    }
-    Crashed.prototype.execute = function () {
-    };
-    return Crashed;
-}());
 //# sourceMappingURL=main.js.map

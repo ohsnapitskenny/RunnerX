@@ -1,7 +1,3 @@
-/**
- * Created by Kenny on 17/05/2017.
- */
-
 class GameObject {
 
     //Properties
