@@ -35,10 +35,10 @@ var Utils = (function () {
     function Utils() {
     }
     Utils.checkCollision = function (instance1, instance2) {
-        return (instance1.x < instance2.x + instance2.width &&
-            instance1.x + instance1.width > instance2.x &&
-            instance1.y < instance2.y + instance2.height &&
-            instance1.height + instance1.y > instance2.y);
+        return (instance1.getX() < instance2.getX() + instance2.getWidth() &&
+        instance1.getX() + instance1.getWidth() > instance2.getX() &&
+        instance1.getY() < instance2.getY() + instance2.getHeight() &&
+        instance1.getHeight() + instance1.getY() > instance2.getY());
     };
     Utils.getRandomInt = function (min, max) {
         min = Math.ceil(min);
@@ -51,7 +51,6 @@ var Crashed = (function () {
     function Crashed(p) {
         this.player = p;
     }
-
     Crashed.prototype.execute = function () {
     };
     return Crashed;
@@ -67,7 +66,6 @@ var Driving = (function () {
             return _this.onKeyDown(e);
         });
     }
-
     Driving.prototype.execute = function () {
         this.player.draw();
     };
@@ -110,6 +108,30 @@ var GameObject = (function () {
         this.x = x;
         this.y = y;
     };
+    GameObject.prototype.getX = function () {
+        return this.x;
+    };
+    GameObject.prototype.setX = function (xPos) {
+        this.x = xPos;
+    };
+    GameObject.prototype.getY = function () {
+        return this.y;
+    };
+    GameObject.prototype.setY = function (yPos) {
+        this.y = yPos;
+    };
+    GameObject.prototype.getWidth = function () {
+        return this.width;
+    };
+    GameObject.prototype.setWidth = function (width) {
+        this.width = width;
+    };
+    GameObject.prototype.getHeight = function () {
+        return this.height;
+    };
+    GameObject.prototype.setHeight = function (height) {
+        this.height = height;
+    };
     return GameObject;
 }());
 var Kart = (function (_super) {
@@ -134,12 +156,6 @@ var Player = (function (_super) {
     };
     Player.prototype.getSpeed = function () {
         return this.speed;
-    };
-    Player.prototype.setY = function (yPos) {
-        this.y = yPos;
-    };
-    Player.prototype.getY = function () {
-        return this.y;
     };
     Player.prototype.move = function () {
         this.behavior.execute();

@@ -30,4 +30,39 @@ class GameObject {
         this.x = x;
         this.y = y;
     }
+
+    // Getters & Setters
+
+    public getX(): number {
+        return this.x;
+    }
+
+    public setX(xPos: number): void {
+        this.x = xPos;
+    }
+
+    public getY(): number {
+        return this.y;
+    }
+
+    public setY(yPos: number): void {
+        this.y = yPos;
+    }
+
+    public getWidth(): number {
+        return this.width;
+    }
+
+    public setWidth(width: number): void {
+        this.width = width;
+    }
+
+    public getHeight(): number {
+        return this.height;
+    }
+
+    public setHeight(height: number): void {
+        this.height = height;
+    }
+
 }

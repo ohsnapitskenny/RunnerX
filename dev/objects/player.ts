@@ -32,14 +32,6 @@ class Player extends GameObject {
         return this.speed;
     }
 
-    public setY(yPos: number): void {
-        this.y = yPos;
-    }
-
-    public getY(): number {
-        return this.y;
-    }
-
     //Methods
     public move() {
         this.behavior.execute();
