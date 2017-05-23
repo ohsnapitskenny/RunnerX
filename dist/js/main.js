@@ -36,9 +36,9 @@ var Utils = (function () {
     }
     Utils.checkCollision = function (instance1, instance2) {
         return (instance1.getX() < instance2.getX() + instance2.getWidth() &&
-        instance1.getX() + instance1.getWidth() > instance2.getX() &&
-        instance1.getY() < instance2.getY() + instance2.getHeight() &&
-        instance1.getHeight() + instance1.getY() > instance2.getY());
+            instance1.getX() + instance1.getWidth() > instance2.getX() &&
+            instance1.getY() < instance2.getY() + instance2.getHeight() &&
+            instance1.getHeight() + instance1.getY() > instance2.getY());
     };
     Utils.getRandomInt = function (min, max) {
         min = Math.ceil(min);
@@ -60,11 +60,9 @@ var Driving = (function () {
         var _this = this;
         this.moveUp = "ArrowUp";
         this.moveDown = "ArrowDown";
-        this.moveSpeed = 3;
+        this.moveSpeed = 5;
         this.player = p;
-        window.addEventListener("keydown", function (e) {
-            return _this.onKeyDown(e);
-        });
+        window.addEventListener("keydown", function (e) { return _this.onKeyDown(e); });
     }
     Driving.prototype.execute = function () {
         this.player.draw();
@@ -81,13 +79,10 @@ var Driving = (function () {
             return;
         }
         this.player.setY(yPosition);
-        this.execute();
     };
     Driving.prototype.crashed = function () {
         var _this = this;
-        window.removeEventListener("keydown", function (e) {
-            return _this.onKeyDown(e);
-        });
+        window.removeEventListener("keydown", function (e) { return _this.onKeyDown(e); });
         this.player.behavior = new Crashed(this.player);
     };
     return Driving;
@@ -102,7 +97,7 @@ var GameObject = (function () {
         this.setHeight(height);
     }
     GameObject.prototype.draw = function () {
-        this.div.style.transform = "translate(" + this.x + "px," + this.y + "px)";
+        this.div.style.transform = "translate(" + this.getX() + "px," + this.getY() + "px)";
     };
     GameObject.prototype.update = function (x, y) {
         this.setX(x);
@@ -147,15 +142,11 @@ var Player = (function (_super) {
         var _this = _super.call(this, "player", parent, 100, 250, 93, 99) || this;
         _this.kart = new Kart(_this.div, 100, 250, 93, 99);
         _this.behavior = new Driving(_this);
-        _this.div.classList.add("mario");
-        _this.setSpeed(2);
+        _this.setPlayer();
         return _this;
     }
-    Player.prototype.setSpeed = function (speed) {
-        this.speed = speed;
-    };
-    Player.prototype.getSpeed = function () {
-        return this.speed;
+    Player.prototype.setPlayer = function () {
+        this.div.classList.add("luigi");
     };
     Player.prototype.move = function () {
         this.behavior.execute();

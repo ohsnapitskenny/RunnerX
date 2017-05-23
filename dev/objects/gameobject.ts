@@ -22,7 +22,7 @@ class GameObject {
 
     //Display object on screen
     public draw(): void {
-        this.div.style.transform = "translate(" + this.x + "px," + this.y + "px)";
+        this.div.style.transform = "translate(" + this.getX() + "px," + this.getY() + "px)";
     }
 
     public update(x: number, y: number): void {

@@ -5,7 +5,7 @@ class Driving implements Behavior {
     // Constant variables (Keyboard movement)
     private readonly moveUp: string = "ArrowUp";
     private readonly moveDown: string = "ArrowDown";
-    private readonly moveSpeed: number = 3;
+    private readonly moveSpeed: number = 5;
 
     // Classes
     public player: Player;
@@ -40,7 +40,7 @@ class Driving implements Behavior {
 
         // Set new position and draw it.
         this.player.setY(yPosition);
-        this.execute();
+
     }
 
     private crashed() {

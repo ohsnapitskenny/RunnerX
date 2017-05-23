@@ -30,7 +30,7 @@ grass {
     background-image: url(../images/grass.png);
     background-repeat: repeat-x;
     height: 600px;
-    width: 1600px;
+    width: 2000px;
 }
 
 player {
@@ -67,6 +67,6 @@ kart {
         transform: translate(0px, 0px);
     }
     100% {
-        transform: translate(-800px, 0px);
+        transform: translate(-1000px, 0px);
     }
 }

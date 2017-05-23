@@ -6,7 +6,6 @@ class Player extends GameObject {
     private kart: Kart;
 
     //Properties
-    private speed: number;
     public behavior: Behavior;
 
     constructor(parent: HTMLElement) {
@@ -17,22 +16,14 @@ class Player extends GameObject {
         this.behavior = new Driving(this);
 
         //TODO: Set Sprite so player can choose which character he/she wants to play. Now hardcoded Mario Sprite.
-        this.div.classList.add("mario");
-
-        //Set Speed
-        this.setSpeed(2);
-    }
-
-    //Getter & Setters
-    public setSpeed(speed: number): void {
-        this.speed = speed;
-    }
-
-    public getSpeed(): number {
-        return this.speed;
+        this.setPlayer();
     }
 
     //Methods
+    public setPlayer() {
+        this.div.classList.add("luigi");
+    }
+
     public move() {
         this.behavior.execute();
     }
