@@ -17,7 +17,7 @@ $ git clone https://github.com/ohsnapitskenny/runnerX
 
 Besides using some design patterns. The basic techniques like: Encapsulation, Composition, Inheritance, Interfaces & Static methods are included in this project.   
 
-###Singleton
+### Singleton
 This one can be found in `game.ts`
 ```
 class Game {
@@ -39,8 +39,8 @@ window.addEventListener("load", function () {
 });
 ```
 
-###Strategy Patterns
+### Strategy Patterns
 This one can be found in `/behavoir`
 
-###UML
+### UML
 This one is still in process. 
