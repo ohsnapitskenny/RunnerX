@@ -43,4 +43,10 @@ window.addEventListener("load", function () {
 This one can be found in `/behavoir`
 
 ### UML
-This one is still in process. 
+This one is still in process.
+
+### Comments Niels
+- Er is nog geen klassendigram (huidige situatie of voor het eindproduct)
+- Misschien nog wat duidelijkheid waar welke technieken te vinden zijn
+#### Beoordeling
+### Voldoende
