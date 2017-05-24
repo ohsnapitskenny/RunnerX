@@ -1,6 +1,6 @@
 class Kart extends GameObject {
 
-    constructor(parent: HTMLElement, x: number, y: number, width: number, height: number) {
-        super("kart", parent, x, y, width, height);
+    constructor(gameObject: gameObject) {
+        super("kart", gameObject.parent, gameObject.x, gameObject.y, gameObject.width, gameObject.height);
     }
 }
