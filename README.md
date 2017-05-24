@@ -4,7 +4,7 @@
 
 - Your goal is keep running and earn points. For each step you make you get points
 
-Visit "https://ohsnapitskenny.github.io/RunnerX/dist/" to play the game.
+Visit this <a href="https://ohsnapitskenny.github.io/RunnerX/dist/" target="_blank">website</a> to play the game.
 
 ## Installation
 Do you to download the files and work on it yourself?
