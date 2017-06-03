@@ -25,6 +25,15 @@ container {
     width: 800px;
 }
 
+score {
+    color: white;
+    font-size: 42px;
+    padding: 20px;
+    text-align: center;
+    text-shadow: 8px 8px 0px black;
+    width: 100%;
+}
+
 grass {
     animation: scrollingBg 8s linear infinite;
     background-image: url(../images/grass.png);

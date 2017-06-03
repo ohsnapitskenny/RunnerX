@@ -24,8 +24,12 @@ class Driving implements Behavior {
         let position: number;
         position = this.player.getY() + this.getMoveSpeedY();
 
-        // Set first/new Y Position
-        this.player.setY(position);
+        // Check if Player moves out of screen
+        if (position == 0 || position == 500) {
+        } else {
+            // Set first/new Y Position
+            this.player.setY(position);
+        }
 
         // Draw position of the player in container
         this.player.draw()

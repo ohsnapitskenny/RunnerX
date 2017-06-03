@@ -70,7 +70,11 @@ var Driving = (function () {
     Driving.prototype.execute = function () {
         var position;
         position = this.player.getY() + this.getMoveSpeedY();
-        this.player.setY(position);
+        if (position == 0 || position == 500) {
+        }
+        else {
+            this.player.setY(position);
+        }
         this.player.draw();
     };
     Driving.prototype.onKeyDown = function (e) {
