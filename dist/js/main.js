@@ -60,30 +60,43 @@ var Driving = (function () {
         var _this = this;
         this.moveUp = "ArrowUp";
         this.moveDown = "ArrowDown";
-        this.moveSpeed = 5;
+        this.moveSpeed = 0;
         this.player = p;
         window.addEventListener("keydown", function (e) { return _this.onKeyDown(e); });
+        window.addEventListener("keyup", function () {
+            return _this.onKeyUp();
+        });
     }
     Driving.prototype.execute = function () {
+        var position;
+        position = this.player.getY() + this.getMoveSpeed();
+        this.player.setY(position);
         this.player.draw();
     };
     Driving.prototype.onKeyDown = function (e) {
-        var yPosition;
         if (e.key === this.moveUp && this.player.behavior instanceof Driving) {
-            yPosition = this.player.getY() - this.moveSpeed;
+            this.setMoveSpeed(-5);
         }
         else if (e.key === this.moveDown && this.player.behavior instanceof Driving) {
-            yPosition = this.player.getY() + this.moveSpeed;
+            this.setMoveSpeed(5);
         }
         else {
             return;
         }
-        this.player.setY(yPosition);
+    };
+    Driving.prototype.onKeyUp = function () {
+        this.setMoveSpeed(0);
     };
     Driving.prototype.crashed = function () {
         var _this = this;
         window.removeEventListener("keydown", function (e) { return _this.onKeyDown(e); });
         this.player.behavior = new Crashed(this.player);
+    };
+    Driving.prototype.getMoveSpeed = function () {
+        return this.moveSpeed;
+    };
+    Driving.prototype.setMoveSpeed = function (s) {
+        this.moveSpeed = s;
     };
     return Driving;
 }());

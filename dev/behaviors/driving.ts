@@ -5,7 +5,7 @@ class Driving implements Behavior {
     // Constant variables (Keyboard movement)
     private readonly moveUp: string = "ArrowUp";
     private readonly moveDown: string = "ArrowDown";
-    private readonly moveSpeed: number = 5;
+    private moveSpeed: number = 0;
 
     // Classes
     public player: Player;
@@ -15,32 +15,37 @@ class Driving implements Behavior {
 
         // Listen to keyboard input
         window.addEventListener("keydown", (e: KeyboardEvent) => this.onKeyDown(e));
+        // When you release key, It sets moveSpeed to 0
+        window.addEventListener("keyup", () => this.onKeyUp());
     }
 
     public execute() {
+        // Temporary variable to calculate Y position
+        let position: number;
+        position = this.player.getY() + this.getMoveSpeed();
+
+        // Set first/new Y Position
+        this.player.setY(position);
+
         // Draw position of the player in container
         this.player.draw()
     }
 
     private onKeyDown(e: KeyboardEvent): void {
-        // Temporary variable to save new Y Position
-        let yPosition: number;
-
+        //TODO: Check that car doesn't move out the container.
         // Check which button is pressed.
         if (e.key === this.moveUp && this.player.behavior instanceof Driving) {
-            //TODO: Check that car doesn't move out the container.
-            yPosition = this.player.getY() - this.moveSpeed;
+            this.setMoveSpeed(-5);
         } else if (e.key === this.moveDown && this.player.behavior instanceof Driving) {
-            //TODO: Check that car doesn't move out the container.
-            yPosition = this.player.getY() + this.moveSpeed;
+            this.setMoveSpeed(5);
         } else {
             // If none of them, exit function
             return;
         }
+    }
 
-        // Set new position and draw it.
-        this.player.setY(yPosition);
-
+    private onKeyUp(): void {
+        this.setMoveSpeed(0);
     }
 
     private crashed() {
@@ -48,4 +53,12 @@ class Driving implements Behavior {
         this.player.behavior = new Crashed(this.player);
     }
 
+    // Getter & Setters
+    public getMoveSpeed(): number {
+        return this.moveSpeed;
+    }
+
+    public setMoveSpeed(s): void {
+        this.moveSpeed = s;
+    }
 }
