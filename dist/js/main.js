@@ -60,7 +60,7 @@ var Driving = (function () {
         var _this = this;
         this.moveUp = "ArrowUp";
         this.moveDown = "ArrowDown";
-        this.moveSpeed = 0;
+        this.moveSpeedY = 0;
         this.player = p;
         window.addEventListener("keydown", function (e) { return _this.onKeyDown(e); });
         window.addEventListener("keyup", function () {
@@ -69,34 +69,34 @@ var Driving = (function () {
     }
     Driving.prototype.execute = function () {
         var position;
-        position = this.player.getY() + this.getMoveSpeed();
+        position = this.player.getY() + this.getMoveSpeedY();
         this.player.setY(position);
         this.player.draw();
     };
     Driving.prototype.onKeyDown = function (e) {
         if (e.key === this.moveUp && this.player.behavior instanceof Driving) {
-            this.setMoveSpeed(-5);
+            this.setMoveSpeedY(-5);
         }
         else if (e.key === this.moveDown && this.player.behavior instanceof Driving) {
-            this.setMoveSpeed(5);
+            this.setMoveSpeedY(5);
         }
         else {
             return;
         }
     };
     Driving.prototype.onKeyUp = function () {
-        this.setMoveSpeed(0);
+        this.setMoveSpeedY(0);
     };
     Driving.prototype.crashed = function () {
         var _this = this;
         window.removeEventListener("keydown", function (e) { return _this.onKeyDown(e); });
         this.player.behavior = new Crashed(this.player);
     };
-    Driving.prototype.getMoveSpeed = function () {
-        return this.moveSpeed;
+    Driving.prototype.getMoveSpeedY = function () {
+        return this.moveSpeedY;
     };
-    Driving.prototype.setMoveSpeed = function (s) {
-        this.moveSpeed = s;
+    Driving.prototype.setMoveSpeedY = function (s) {
+        this.moveSpeedY = s;
     };
     return Driving;
 }());

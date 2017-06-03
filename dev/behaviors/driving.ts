@@ -5,7 +5,7 @@ class Driving implements Behavior {
     // Constant variables (Keyboard movement)
     private readonly moveUp: string = "ArrowUp";
     private readonly moveDown: string = "ArrowDown";
-    private moveSpeed: number = 0;
+    private moveSpeedY: number = 0;
 
     // Classes
     public player: Player;
@@ -22,7 +22,7 @@ class Driving implements Behavior {
     public execute() {
         // Temporary variable to calculate Y position
         let position: number;
-        position = this.player.getY() + this.getMoveSpeed();
+        position = this.player.getY() + this.getMoveSpeedY();
 
         // Set first/new Y Position
         this.player.setY(position);
@@ -35,9 +35,9 @@ class Driving implements Behavior {
         //TODO: Check that car doesn't move out the container.
         // Check which button is pressed.
         if (e.key === this.moveUp && this.player.behavior instanceof Driving) {
-            this.setMoveSpeed(-5);
+            this.setMoveSpeedY(-5);
         } else if (e.key === this.moveDown && this.player.behavior instanceof Driving) {
-            this.setMoveSpeed(5);
+            this.setMoveSpeedY(5);
         } else {
             // If none of them, exit function
             return;
@@ -45,7 +45,7 @@ class Driving implements Behavior {
     }
 
     private onKeyUp(): void {
-        this.setMoveSpeed(0);
+        this.setMoveSpeedY(0);
     }
 
     private crashed() {
@@ -54,11 +54,11 @@ class Driving implements Behavior {
     }
 
     // Getter & Setters
-    public getMoveSpeed(): number {
-        return this.moveSpeed;
+    public getMoveSpeedY(): number {
+        return this.moveSpeedY;
     }
 
-    public setMoveSpeed(s): void {
-        this.moveSpeed = s;
+    public setMoveSpeedY(s): void {
+        this.moveSpeedY = s;
     }
 }
