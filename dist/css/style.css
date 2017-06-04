@@ -30,8 +30,9 @@ score {
     font-size: 42px;
     padding: 20px;
     text-align: center;
-    text-shadow: 8px 8px 0px black;
+    text-shadow: 2px 2px 0px black;
     width: 100%;
+    z-index: 1;
 }
 
 grass {

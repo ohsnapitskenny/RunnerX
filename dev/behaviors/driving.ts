@@ -31,8 +31,17 @@ class Driving implements Behavior {
             this.player.setY(position);
         }
 
-        // Draw position of the player in container
-        this.player.draw()
+        // Check if Player is crashed
+        let g = Game.getInstance();
+
+        if (!g.getGameStatus()) {
+            // Draw position of the player in container
+            this.player.draw()
+        } else {
+            this.crashed();
+        }
+
+
     }
 
     private onKeyDown(e: KeyboardEvent): void {

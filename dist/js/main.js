@@ -11,8 +11,16 @@ var __extends = (this && this.__extends) || (function () {
 var Game = (function () {
     function Game() {
         var _this = this;
+        this.gameOver = false;
+        this.score = 0;
         var container = document.getElementById("container");
         this.player = new Player(container);
+        this.obstacles = new Array();
+        for (var i = 0; i < 5; i++) {
+            var obstacle = new Obstacle(container);
+            this.obstacles.push(obstacle);
+            obstacle.move();
+        }
         requestAnimationFrame(function () { return _this.gameLoop(); });
     }
     Game.getInstance = function () {
@@ -24,7 +32,32 @@ var Game = (function () {
     Game.prototype.gameLoop = function () {
         var _this = this;
         this.player.move();
+        if (!this.gameOver) {
+            for (var _i = 0, _a = this.obstacles; _i < _a.length; _i++) {
+                var obstacle = _a[_i];
+                if (Utils.checkCollision(obstacle, this.player)) {
+                    this.endGame();
+                }
+                else {
+                    obstacle.move();
+                    this.score = this.score + 1;
+                    var scoreText = "Score: " + this.score;
+                    var board = document.getElementsByTagName("score")[0];
+                    board.innerHTML = scoreText;
+                }
+            }
+        }
         requestAnimationFrame(function () { return _this.gameLoop(); });
+    };
+    Game.prototype.endGame = function () {
+        this.gameOver = true;
+        for (var _i = 0, _a = this.obstacles; _i < _a.length; _i++) {
+            var obstacle = _a[_i];
+            obstacle.setSpeed(0);
+        }
+    };
+    Game.prototype.getGameStatus = function () {
+        return this.gameOver;
     };
     return Game;
 }());
@@ -75,7 +108,13 @@ var Driving = (function () {
         else {
             this.player.setY(position);
         }
-        this.player.draw();
+        var g = Game.getInstance();
+        if (!g.getGameStatus()) {
+            this.player.draw();
+        }
+        else {
+            this.crashed();
+        }
     };
     Driving.prototype.onKeyDown = function (e) {
         if (e.key === this.moveUp && this.player.behavior instanceof Driving) {
@@ -153,10 +192,44 @@ var Kart = (function (_super) {
     }
     return Kart;
 }(GameObject));
+var Obstacle = (function (_super) {
+    __extends(Obstacle, _super);
+    function Obstacle(parent) {
+        var _this = _super.call(this, "kart", parent, Utils.getRandomInt(1000, 1200), Obstacle.obstacleY, 93, 99) || this;
+        _this.kart = new Kart(_this.div, 10, 0, 93, 99);
+        _this.setPlayer();
+        _this.setSpeed(Utils.getRandomInt(-1, -8));
+        _this.draw();
+        Obstacle.obstacleY = Obstacle.obstacleY + 125;
+        return _this;
+    }
+
+    Obstacle.prototype.setPlayer = function () {
+        this.div.classList.add("toad");
+    };
+    Obstacle.prototype.move = function () {
+        if (this.getX() < -200) {
+            this.setX(Utils.getRandomInt(800, 1000));
+            this.setSpeed(Utils.getRandomInt(-2, -6));
+        }
+        else {
+            this.x += this.speed;
+            this.draw();
+        }
+    };
+    Obstacle.prototype.getSpeed = function () {
+        return this.speed;
+    };
+    Obstacle.prototype.setSpeed = function (s) {
+        this.speed = s;
+    };
+    return Obstacle;
+}(GameObject));
+Obstacle.obstacleY = 0;
 var Player = (function (_super) {
     __extends(Player, _super);
     function Player(parent) {
-        var _this = _super.call(this, "player", parent, 100, 250, 93, 99) || this;
+        var _this = _super.call(this, "player", parent, 50, 250, 93, 99) || this;
         _this.kart = new Kart(_this.div, 100, 250, 93, 99);
         _this.behavior = new Driving(_this);
         _this.setPlayer();

@@ -9,6 +9,6 @@ class Crashed implements Behavior {
     }
 
     public execute() {
-        // TODO: Show gameover screen
+        //TODO: Show dead animation?
     }
 }

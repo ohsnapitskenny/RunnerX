@@ -9,13 +9,13 @@ class Player extends GameObject {
     public behavior: Behavior;
 
     constructor(parent: HTMLElement) {
-        super("player", parent, 100, 250, 93, 99);
+        super("player", parent, 50, 250, 93, 99);
         this.kart = new Kart(this.div, 100, 250, 93, 99);
 
         // Set default behavior Driving
         this.behavior = new Driving(this);
 
-        //TODO: Set Sprite so player can choose which character he/she wants to play. Now hardcoded Mario Sprite.
+        //TODO: Set Sprite so player can choose which character he/she wants to play. Now hardcoded Luigi Sprite.
         this.setPlayer();
     }
 
