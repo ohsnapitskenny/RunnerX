@@ -28,6 +28,7 @@ class Obstacle extends GameObject {
 
     public move() {
         if (this.getX() < -200) {
+            s
             this.setX(Utils.getRandomInt(800, 1000));
             this.setSpeed(Utils.getRandomInt(-1, -6));
         } else {
