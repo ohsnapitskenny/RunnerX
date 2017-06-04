@@ -96,9 +96,7 @@ var Driving = (function () {
         this.moveSpeedY = 0;
         this.player = p;
         window.addEventListener("keydown", function (e) { return _this.onKeyDown(e); });
-        window.addEventListener("keyup", function () {
-            return _this.onKeyUp();
-        });
+        window.addEventListener("keyup", function () { return _this.onKeyUp(); });
     }
     Driving.prototype.execute = function () {
         var position;
@@ -203,14 +201,13 @@ var Obstacle = (function (_super) {
         Obstacle.obstacleY = Obstacle.obstacleY + 125;
         return _this;
     }
-
     Obstacle.prototype.setPlayer = function () {
         this.div.classList.add("toad");
     };
     Obstacle.prototype.move = function () {
         if (this.getX() < -200) {
             this.setX(Utils.getRandomInt(800, 1000));
-            this.setSpeed(Utils.getRandomInt(-2, -6));
+            this.setSpeed(Utils.getRandomInt(-1, -6));
         }
         else {
             this.x += this.speed;
