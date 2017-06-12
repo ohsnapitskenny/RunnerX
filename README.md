@@ -43,4 +43,4 @@ window.addEventListener("load", function () {
 This one can be found in `/behavoir`
 
 ### UML
-![uml](uml.jpg)
+[RunnerX UML](http://full/path/to/img.jpg "UML")
