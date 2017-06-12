@@ -45,7 +45,6 @@ class Driving implements Behavior {
     }
 
     private onKeyDown(e: KeyboardEvent): void {
-        //TODO: Check that car doesn't move out the container.
         // Check which button is pressed.
         if (e.key === this.moveUp && this.player.behavior instanceof Driving) {
             this.setMoveSpeedY(-5);
