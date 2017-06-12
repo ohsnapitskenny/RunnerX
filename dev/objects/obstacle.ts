@@ -10,7 +10,8 @@ class Obstacle extends GameObject {
     private speed: number;
 
     constructor(parent: HTMLElement) {
-        super("kart", parent, Utils.getRandomInt(1000, 1200), Obstacle.obstacleY, 93, 99);
+        // Construct obstacle and add a kart
+        super("player", parent, Utils.getRandomInt(1000, 1200), Obstacle.obstacleY, 93, 99);
         this.kart = new Kart(this.div, 10, 0, 93, 99);
 
         //TODO: Set Sprite so player can choose which character he/she wants to play. Now hardcoded Toad Sprite.
@@ -18,6 +19,8 @@ class Obstacle extends GameObject {
         this.setSpeed(Utils.getRandomInt(-1, -8));
 
         this.draw();
+
+        // After constructing one obstacle, add the Y position with 125px so obstacles have other heights
         Obstacle.obstacleY = Obstacle.obstacleY + 125;
     }
 

@@ -193,7 +193,7 @@ var Kart = (function (_super) {
 var Obstacle = (function (_super) {
     __extends(Obstacle, _super);
     function Obstacle(parent) {
-        var _this = _super.call(this, "kart", parent, Utils.getRandomInt(1000, 1200), Obstacle.obstacleY, 93, 99) || this;
+        var _this = _super.call(this, "player", parent, Utils.getRandomInt(1000, 1200), Obstacle.obstacleY, 93, 99) || this;
         _this.kart = new Kart(_this.div, 10, 0, 93, 99);
         _this.setPlayer();
         _this.setSpeed(Utils.getRandomInt(-1, -8));
