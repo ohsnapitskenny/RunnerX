@@ -25,11 +25,11 @@ class Obstacle extends GameObject {
     }
 
     //Methods
-    public setPlayer() {
+    public setPlayer(): void {
         this.div.classList.add("toad");
     }
 
-    public move() {
+    public move(): void {
         if (this.getX() < -200) {
             this.setX(Utils.getRandomInt(800, 1000));
             this.setSpeed(Utils.getRandomInt(-1, -6));

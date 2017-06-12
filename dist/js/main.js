@@ -153,10 +153,6 @@ var GameObject = (function () {
     GameObject.prototype.draw = function () {
         this.div.style.transform = "translate(" + this.getX() + "px," + this.getY() + "px)";
     };
-    GameObject.prototype.update = function (x, y) {
-        this.setX(x);
-        this.setY(y);
-    };
     GameObject.prototype.getX = function () {
         return this.x;
     };

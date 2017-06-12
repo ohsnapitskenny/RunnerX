@@ -4,7 +4,7 @@ class Game {
 
     //Objects
     private player: Player;
-    private obstacles: Array<Kart>;
+    private obstacles: Array<Obstacle>;
 
     //Properties
     private gameOver: boolean = false;
@@ -38,7 +38,7 @@ class Game {
         requestAnimationFrame(() => this.gameLoop());
     }
 
-    private gameLoop() {
+    private gameLoop(): void {
         this.player.move();
 
         if (!this.gameOver) {
@@ -60,10 +60,11 @@ class Game {
         requestAnimationFrame(() => this.gameLoop());
     }
 
-    private endGame() {
+    private endGame(): void {
         this.gameOver = true;
 
         // Stop all cars
+        // TODO: Move this code to create an observable
         for (let obstacle of this.obstacles) {
             obstacle.setSpeed(0);
         }

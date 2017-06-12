@@ -20,11 +20,11 @@ class Player extends GameObject {
     }
 
     //Methods
-    public setPlayer() {
+    public setPlayer(): void {
         this.div.classList.add("luigi");
     }
 
-    public move() {
+    public move(): void {
         this.behavior.execute();
     }
 }

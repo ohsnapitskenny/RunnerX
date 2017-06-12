@@ -25,11 +25,6 @@ class GameObject {
         this.div.style.transform = "translate(" + this.getX() + "px," + this.getY() + "px)";
     }
 
-    public update(x: number, y: number): void {
-        this.setX(x);
-        this.setY(y);
-    }
-
     // Getters & Setters
     public getX(): number {
         return this.x;

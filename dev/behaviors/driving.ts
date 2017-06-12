@@ -60,7 +60,7 @@ class Driving implements Behavior {
         this.setMoveSpeedY(0);
     }
 
-    private crashed() {
+    private crashed(): void {
         window.removeEventListener("keydown", (e: KeyboardEvent) => this.onKeyDown(e));
         this.player.behavior = new Crashed(this.player);
     }
