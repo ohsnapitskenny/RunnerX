@@ -26,7 +26,7 @@ class Player extends GameObject implements Observable {
     }
 
     //Methods
-    public setPlayer(): void {
+    private setPlayer(): void {
         // Set sprite
         this.div.classList.add("luigi");
     }

@@ -8,10 +8,6 @@ enum Keys {
 
 class Driving implements Behavior {
 
-    // Constant variables (Keyboard movement)
-    private readonly moveUp: string = "ArrowUp";
-    private readonly moveDown: string = "ArrowDown";
-
     // Properties
     private key: Keys;
     private moveSpeedY: number = 0;

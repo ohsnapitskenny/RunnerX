@@ -102,8 +102,6 @@ var Keys;
 var Driving = (function () {
     function Driving(p) {
         var _this = this;
-        this.moveUp = "ArrowUp";
-        this.moveDown = "ArrowDown";
         this.moveSpeedY = 0;
         this.player = p;
         window.addEventListener("keydown", function (e) { return _this.onKeyDown(e); });
