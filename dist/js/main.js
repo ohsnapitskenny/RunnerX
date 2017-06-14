@@ -250,6 +250,7 @@ var Player = (function (_super) {
         this.div.classList.add("luigi");
     };
     Player.prototype.setDeadLuigi = function () {
+        this.div.classList.remove("luigi");
         this.div.classList.add("dead");
         for (var _i = 0, _a = this.observers; _i < _a.length; _i++) {
             var observer = _a[_i];

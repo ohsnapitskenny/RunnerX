@@ -32,6 +32,7 @@ class Player extends GameObject implements Observable {
     }
 
     public setDeadLuigi(): void {
+        this.div.classList.remove("luigi");
         this.div.classList.add("dead");
 
         // Foreach observer. Set speed to 0.
