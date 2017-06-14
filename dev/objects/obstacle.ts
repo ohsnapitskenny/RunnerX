@@ -1,13 +1,14 @@
 ///<reference path="gameobject.ts"/>
+///<reference path="../observers/observer.ts"/>
 
-class Obstacle extends GameObject {
+class Obstacle extends GameObject implements Observer {
 
     //Models
-    private kart: Kart;
+    public kart: Kart;
 
     // Properties
     private static obstacleY: number = 0;
-    private speed: number;
+    public speed: number;
 
     constructor(parent: HTMLElement) {
         // Construct obstacle and add a kart
@@ -47,5 +48,10 @@ class Obstacle extends GameObject {
 
     public setSpeed(s: number): void {
         this.speed = s;
+    }
+
+    public notify(): void {
+        this.div.classList.remove("toad");
+        this.div.classList.add("toad_laugh");
     }
 }

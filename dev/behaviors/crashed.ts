@@ -9,6 +9,6 @@ class Crashed implements Behavior {
     }
 
     public execute() {
-        //TODO: Show dead animation?
+        this.player.setDeadLuigi();
     }
 }

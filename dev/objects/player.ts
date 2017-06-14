@@ -1,12 +1,16 @@
 ///<reference path="gameobject.ts"/>
+///<reference path="../observers/observable.ts"/>
 
-class Player extends GameObject {
+
+class Player extends GameObject implements Observable {
 
     //Models
     private kart: Kart;
 
     //Properties
+    public observers: Array<Obstacle>;
     public behavior: Behavior;
+    public score: number;
 
     constructor(parent: HTMLElement) {
         super("player", parent, 50, 250, 93, 99);
@@ -24,7 +28,25 @@ class Player extends GameObject {
         this.div.classList.add("luigi");
     }
 
+    public setDeadLuigi(): void {
+        this.div.classList.add("dead");
+
+        for (let observer of this.observers) {
+            observer.notify();
+        }
+    }
+
     public move(): void {
         this.behavior.execute();
+    }
+
+    // Observable methods
+    public subscribe(o: Observer): void {
+        this.observers.push(o);
+    }
+
+    public unsubscribe(o: Observer): void {
+        let g = Game.getInstance();
+        Utils.removeFromGame(o, g.getObstacles());
     }
 }

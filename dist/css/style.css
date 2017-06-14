@@ -71,6 +71,9 @@ kart {
     background-image: url(../images/toad.png);
 }
 
+.dead {
+    background-image: url(../images/luigi_death.png);
+}
 /* Animation */
 @keyframes scrollingBg {
     0% {

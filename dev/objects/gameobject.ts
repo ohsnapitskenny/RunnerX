@@ -58,4 +58,9 @@ class GameObject {
         this.height = height;
     }
 
+    // Remove div
+    public removeDiv(): void {
+        this.div.remove();
+    }
+
 }

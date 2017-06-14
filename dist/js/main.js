@@ -12,14 +12,14 @@ var Game = (function () {
     function Game() {
         var _this = this;
         this.gameOver = false;
-        this.score = 0;
         var container = document.getElementById("container");
         this.player = new Player(container);
         this.obstacles = new Array();
+        this.player.score = 0;
         for (var i = 0; i < 5; i++) {
             var obstacle = new Obstacle(container);
             this.obstacles.push(obstacle);
-            obstacle.move();
+            this.player.subscribe(obstacle);
         }
         requestAnimationFrame(function () { return _this.gameLoop(); });
     }
@@ -40,8 +40,8 @@ var Game = (function () {
                 }
                 else {
                     obstacle.move();
-                    this.score = this.score + 1;
-                    var scoreText = "Score: " + this.score;
+                    this.player.score = this.player.score + 1;
+                    var scoreText = "Score: " + this.player.score;
                     var board = document.getElementsByTagName("score")[0];
                     board.innerHTML = scoreText;
                 }
@@ -58,6 +58,9 @@ var Game = (function () {
     };
     Game.prototype.getGameStatus = function () {
         return this.gameOver;
+    };
+    Game.prototype.getObstacles = function () {
+        return this.obstacles;
     };
     return Game;
 }());
@@ -78,6 +81,13 @@ var Utils = (function () {
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min)) + min;
     };
+    Utils.removeFromGame = function (go, arr) {
+        go.removeDiv();
+        var i = arr.indexOf(go);
+        if (i != -1) {
+            arr.splice(i, 1);
+        }
+    };
     return Utils;
 }());
 var Crashed = (function () {
@@ -85,6 +95,7 @@ var Crashed = (function () {
         this.player = p;
     }
     Crashed.prototype.execute = function () {
+        this.player.setDeadLuigi();
     };
     return Crashed;
 }());
@@ -177,6 +188,9 @@ var GameObject = (function () {
     GameObject.prototype.setHeight = function (height) {
         this.height = height;
     };
+    GameObject.prototype.removeDiv = function () {
+        this.div.remove();
+    };
     return GameObject;
 }());
 var Kart = (function (_super) {
@@ -216,6 +230,10 @@ var Obstacle = (function (_super) {
     Obstacle.prototype.setSpeed = function (s) {
         this.speed = s;
     };
+    Obstacle.prototype.notify = function () {
+        this.div.classList.remove("toad");
+        this.div.classList.add("toad_laugh");
+    };
     return Obstacle;
 }(GameObject));
 Obstacle.obstacleY = 0;
@@ -231,8 +249,22 @@ var Player = (function (_super) {
     Player.prototype.setPlayer = function () {
         this.div.classList.add("luigi");
     };
+    Player.prototype.setDeadLuigi = function () {
+        this.div.classList.add("dead");
+        for (var _i = 0, _a = this.observers; _i < _a.length; _i++) {
+            var observer = _a[_i];
+            observer.notify();
+        }
+    };
     Player.prototype.move = function () {
         this.behavior.execute();
+    };
+    Player.prototype.subscribe = function (o) {
+        this.observers.push(o);
+    };
+    Player.prototype.unsubscribe = function (o) {
+        var g = Game.getInstance();
+        Utils.removeFromGame(o, g.getObstacles());
     };
     return Player;
 }(GameObject));

@@ -14,4 +14,12 @@ class Utils {
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min)) + min;
     }
+
+    public static removeFromGame(go: GameObject, arr: Array<any>) {
+        go.removeDiv();
+        let i: number = arr.indexOf(go);
+        if (i != -1) {
+            arr.splice(i, 1);
+        }
+    }
 }

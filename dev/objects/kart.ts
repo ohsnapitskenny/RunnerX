@@ -1,3 +1,5 @@
+///<reference path="gameobject.ts"/>
+
 class Kart extends GameObject {
 
     constructor(parent: HTMLElement, x: number, y: number, width: number, height: number) {
