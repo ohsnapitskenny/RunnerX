@@ -93,7 +93,6 @@ var Crashed = (function () {
         audio.play();
         this.player.setDeadLuigi();
     }
-
     Crashed.prototype.execute = function () {
     };
     return Crashed;
