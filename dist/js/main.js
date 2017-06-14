@@ -17,7 +17,7 @@ var Game = (function () {
         this.obstacles = new Array();
         this.player.score = 0;
         for (var i = 0; i < 5; i++) {
-            var obstacle = new Obstacle(container);
+            var obstacle = new Obstacle(container, this.player);
             this.obstacles.push(obstacle);
             this.player.subscribe(obstacle);
         }
@@ -51,10 +51,6 @@ var Game = (function () {
     };
     Game.prototype.endGame = function () {
         this.gameOver = true;
-        for (var _i = 0, _a = this.obstacles; _i < _a.length; _i++) {
-            var obstacle = _a[_i];
-            obstacle.setSpeed(0);
-        }
     };
     Game.prototype.getGameStatus = function () {
         return this.gameOver;
@@ -93,9 +89,12 @@ var Utils = (function () {
 var Crashed = (function () {
     function Crashed(p) {
         this.player = p;
-    }
-    Crashed.prototype.execute = function () {
+        var audio = new Audio('assets/dead.mp3');
+        audio.play();
         this.player.setDeadLuigi();
+    }
+
+    Crashed.prototype.execute = function () {
     };
     return Crashed;
 }());
@@ -202,8 +201,8 @@ var Kart = (function (_super) {
 }(GameObject));
 var Obstacle = (function (_super) {
     __extends(Obstacle, _super);
-    function Obstacle(parent) {
-        var _this = _super.call(this, "player", parent, Utils.getRandomInt(1000, 1200), Obstacle.obstacleY, 93, 99) || this;
+    function Obstacle(parent, p) {
+        var _this = _super.call(this, "obstacle", parent, Utils.getRandomInt(1000, 1200), Obstacle.obstacleY, 93, 99) || this;
         _this.kart = new Kart(_this.div, 10, 0, 93, 99);
         _this.setPlayer();
         _this.setSpeed(Utils.getRandomInt(-1, -8));
@@ -233,6 +232,7 @@ var Obstacle = (function (_super) {
     Obstacle.prototype.notify = function () {
         this.div.classList.remove("toad");
         this.div.classList.add("toad_laugh");
+        this.setSpeed(0);
     };
     return Obstacle;
 }(GameObject));
@@ -242,6 +242,7 @@ var Player = (function (_super) {
     function Player(parent) {
         var _this = _super.call(this, "player", parent, 50, 250, 93, 99) || this;
         _this.kart = new Kart(_this.div, 100, 250, 93, 99);
+        _this.observers = new Array();
         _this.behavior = new Driving(_this);
         _this.setPlayer();
         return _this;

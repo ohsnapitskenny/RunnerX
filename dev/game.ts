@@ -32,8 +32,9 @@ class Game {
         // Create obstacles and put it in Array.
         for (let i = 0; i < 5; i++) {
             //Create Obstacle and push it to the array
-            let obstacle = new Obstacle(container);
+            let obstacle = new Obstacle(container, this.player);
             this.obstacles.push(obstacle);
+
 
             // Subscribe to player
             this.player.subscribe(obstacle);
@@ -69,12 +70,6 @@ class Game {
 
     private endGame(): void {
         this.gameOver = true;
-
-        // Stop all cars
-        // TODO: Move this code to create an observable
-        for (let obstacle of this.obstacles) {
-            obstacle.setSpeed(0);
-        }
     }
 
     public getGameStatus(): boolean {

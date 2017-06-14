@@ -4,15 +4,15 @@
 class Obstacle extends GameObject implements Observer {
 
     //Models
-    public kart: Kart;
+    private kart: Kart;
 
     // Properties
     private static obstacleY: number = 0;
-    public speed: number;
+    private speed: number;
 
-    constructor(parent: HTMLElement) {
+    constructor(parent: HTMLElement, p: Player) {
         // Construct obstacle and add a kart
-        super("player", parent, Utils.getRandomInt(1000, 1200), Obstacle.obstacleY, 93, 99);
+        super("obstacle", parent, Utils.getRandomInt(1000, 1200), Obstacle.obstacleY, 93, 99);
         this.kart = new Kart(this.div, 10, 0, 93, 99);
 
         //TODO: Set Sprite so player can choose which character he/she wants to play. Now hardcoded Toad Sprite.
@@ -53,5 +53,6 @@ class Obstacle extends GameObject implements Observer {
     public notify(): void {
         this.div.classList.remove("toad");
         this.div.classList.add("toad_laugh");
+        this.setSpeed(0);
     }
 }

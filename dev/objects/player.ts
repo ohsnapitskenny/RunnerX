@@ -1,7 +1,6 @@
 ///<reference path="gameobject.ts"/>
 ///<reference path="../observers/observable.ts"/>
 
-
 class Player extends GameObject implements Observable {
 
     //Models
@@ -16,8 +15,12 @@ class Player extends GameObject implements Observable {
         super("player", parent, 50, 250, 93, 99);
         this.kart = new Kart(this.div, 100, 250, 93, 99);
 
+        // Initialize Array
+        this.observers = new Array();
+
         // Set default behavior Driving
         this.behavior = new Driving(this);
+
 
         //TODO: Set Sprite so player can choose which character he/she wants to play. Now hardcoded Luigi Sprite.
         this.setPlayer();
@@ -31,6 +34,7 @@ class Player extends GameObject implements Observable {
     public setDeadLuigi(): void {
         this.div.classList.add("dead");
 
+        // Foreach observer. Set speed to 0.
         for (let observer of this.observers) {
             observer.notify();
         }

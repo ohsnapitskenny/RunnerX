@@ -54,6 +54,11 @@ kart {
     width: 93px;
 }
 
+obstacle {
+    height: 99px;
+    width: 93px;
+}
+
 /* Classes */
 .mario {
     background-image: url(../images/mario.png);
@@ -74,6 +79,11 @@ kart {
 .dead {
     background-image: url(../images/luigi_death.png);
 }
+
+.toad_laugh {
+    background-image: url(../images/toad_laugh.png);
+}
+
 /* Animation */
 @keyframes scrollingBg {
     0% {
