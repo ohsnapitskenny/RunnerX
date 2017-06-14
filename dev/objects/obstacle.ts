@@ -31,6 +31,7 @@ class Obstacle extends GameObject implements Observer {
     }
 
     public move(): void {
+        // If Obstacle is moving out of screen. Place it on the right side somewhere between 800,1000, Also give it a random speed. Else just keep driving
         if (this.getX() < -200) {
             this.setX(Utils.getRandomInt(800, 1000));
             this.setSpeed(Utils.getRandomInt(-1, -6));
@@ -41,6 +42,12 @@ class Obstacle extends GameObject implements Observer {
 
     }
 
+    public notify(): void {
+        this.div.classList.remove("toad");
+        this.div.classList.add("toad_laugh");
+        this.setSpeed(0);
+    }
+
     // Getters & Setters
     public getSpeed(): number {
         return this.speed;
@@ -48,11 +55,5 @@ class Obstacle extends GameObject implements Observer {
 
     public setSpeed(s: number): void {
         this.speed = s;
-    }
-
-    public notify(): void {
-        this.div.classList.remove("toad");
-        this.div.classList.add("toad_laugh");
-        this.setSpeed(0);
     }
 }

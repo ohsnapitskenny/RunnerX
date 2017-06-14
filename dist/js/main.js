@@ -55,9 +55,6 @@ var Game = (function () {
     Game.prototype.getGameStatus = function () {
         return this.gameOver;
     };
-    Game.prototype.getObstacles = function () {
-        return this.obstacles;
-    };
     return Game;
 }());
 window.addEventListener("load", function () {
@@ -97,6 +94,11 @@ var Crashed = (function () {
     };
     return Crashed;
 }());
+var Keys;
+(function (Keys) {
+    Keys[Keys["ArrowUp"] = 0] = "ArrowUp";
+    Keys[Keys["ArrowDown"] = 1] = "ArrowDown";
+})(Keys || (Keys = {}));
 var Driving = (function () {
     function Driving(p) {
         var _this = this;
@@ -124,10 +126,20 @@ var Driving = (function () {
         }
     };
     Driving.prototype.onKeyDown = function (e) {
-        if (e.key === this.moveUp && this.player.behavior instanceof Driving) {
+        switch (e.keyCode) {
+            case 38:
+                this.key = Keys.ArrowUp;
+                break;
+            case 40:
+                this.key = Keys.ArrowDown;
+                break;
+            default:
+                break;
+        }
+        if (this.key == Keys.ArrowUp) {
             this.setMoveSpeedY(-5);
         }
-        else if (e.key === this.moveDown && this.player.behavior instanceof Driving) {
+        else if (this.key == Keys.ArrowDown) {
             this.setMoveSpeedY(5);
         }
         else {
@@ -140,6 +152,9 @@ var Driving = (function () {
     Driving.prototype.crashed = function () {
         var _this = this;
         window.removeEventListener("keydown", function (e) { return _this.onKeyDown(e); });
+        window.removeEventListener("keyup", function () {
+            return _this.onKeyUp();
+        });
         this.player.behavior = new Crashed(this.player);
     };
     Driving.prototype.getMoveSpeedY = function () {
@@ -222,16 +237,16 @@ var Obstacle = (function (_super) {
             this.draw();
         }
     };
+    Obstacle.prototype.notify = function () {
+        this.div.classList.remove("toad");
+        this.div.classList.add("toad_laugh");
+        this.setSpeed(0);
+    };
     Obstacle.prototype.getSpeed = function () {
         return this.speed;
     };
     Obstacle.prototype.setSpeed = function (s) {
         this.speed = s;
-    };
-    Obstacle.prototype.notify = function () {
-        this.div.classList.remove("toad");
-        this.div.classList.add("toad_laugh");
-        this.setSpeed(0);
     };
     return Obstacle;
 }(GameObject));
@@ -264,8 +279,10 @@ var Player = (function (_super) {
         this.observers.push(o);
     };
     Player.prototype.unsubscribe = function (o) {
-        var g = Game.getInstance();
-        Utils.removeFromGame(o, g.getObstacles());
+        var i = this.observers.indexOf(o);
+        if (i != -1) {
+            this.observers.splice(i, 1);
+        }
     };
     return Player;
 }(GameObject));

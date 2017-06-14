@@ -1,10 +1,19 @@
 ///<reference path="behavior.ts"/>
 
+// Constant values for the movement keys
+enum Keys {
+    ArrowUp,
+    ArrowDown
+}
+
 class Driving implements Behavior {
 
     // Constant variables (Keyboard movement)
     private readonly moveUp: string = "ArrowUp";
     private readonly moveDown: string = "ArrowDown";
+
+    // Properties
+    private key: Keys;
     private moveSpeedY: number = 0;
 
     // Classes
@@ -34,6 +43,7 @@ class Driving implements Behavior {
         // Check if Player is crashed
         let g = Game.getInstance();
 
+        // If not gameOver
         if (!g.getGameStatus()) {
             // Draw position of the player in container
             this.player.draw()
@@ -44,11 +54,23 @@ class Driving implements Behavior {
 
     }
 
+    // Check which key is pressed, change the this.key to another Enum Value
     private onKeyDown(e: KeyboardEvent): void {
+        switch (e.keyCode) {
+            case 38:
+                this.key = Keys.ArrowUp;
+                break;
+            case 40:
+                this.key = Keys.ArrowDown;
+                break;
+            default:
+                break;
+        }
+
         // Check which button is pressed.
-        if (e.key === this.moveUp && this.player.behavior instanceof Driving) {
+        if (this.key == Keys.ArrowUp) {
             this.setMoveSpeedY(-5);
-        } else if (e.key === this.moveDown && this.player.behavior instanceof Driving) {
+        } else if (this.key == Keys.ArrowDown) {
             this.setMoveSpeedY(5);
         } else {
             // If none of them, exit function
@@ -56,12 +78,14 @@ class Driving implements Behavior {
         }
     }
 
+    // Reset movement when no key is pressed
     private onKeyUp(): void {
         this.setMoveSpeedY(0);
     }
 
     private crashed(): void {
         window.removeEventListener("keydown", (e: KeyboardEvent) => this.onKeyDown(e));
+        window.removeEventListener("keyup", () => this.onKeyUp());
         this.player.behavior = new Crashed(this.player);
     }
 

@@ -21,17 +21,18 @@ class Player extends GameObject implements Observable {
         // Set default behavior Driving
         this.behavior = new Driving(this);
 
-
-        //TODO: Set Sprite so player can choose which character he/she wants to play. Now hardcoded Luigi Sprite.
+        // TODO: Set Sprite so player can choose which character he/she wants to play. Now hardcoded Luigi Sprite.
         this.setPlayer();
     }
 
     //Methods
     public setPlayer(): void {
+        // Set sprite
         this.div.classList.add("luigi");
     }
 
     public setDeadLuigi(): void {
+        // Remove and set new sprite
         this.div.classList.remove("luigi");
         this.div.classList.add("dead");
 
@@ -51,7 +52,9 @@ class Player extends GameObject implements Observable {
     }
 
     public unsubscribe(o: Observer): void {
-        let g = Game.getInstance();
-        Utils.removeFromGame(o, g.getObstacles());
+        let i: number = this.observers.indexOf(o);
+        if (i != -1) {
+            this.observers.splice(i, 1);
+        }
     }
 }

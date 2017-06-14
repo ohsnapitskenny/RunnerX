@@ -35,7 +35,6 @@ class Game {
             let obstacle = new Obstacle(container, this.player);
             this.obstacles.push(obstacle);
 
-
             // Subscribe to player
             this.player.subscribe(obstacle);
         }
@@ -54,6 +53,7 @@ class Game {
                 if (Utils.checkCollision(obstacle, this.player)) {
                     this.endGame();
                 } else {
+                    // If there is no collision just move all obstacles and add score to player
                     obstacle.move();
                     this.player.score = this.player.score + 1;
 
@@ -64,7 +64,6 @@ class Game {
                 }
             }
         }
-
         requestAnimationFrame(() => this.gameLoop());
     }
 
@@ -74,10 +73,6 @@ class Game {
 
     public getGameStatus(): boolean {
         return this.gameOver;
-    }
-
-    public getObstacles(): Array<Obstacle> {
-        return this.obstacles;
     }
 }
 
