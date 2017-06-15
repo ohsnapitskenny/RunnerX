@@ -71,7 +71,7 @@ This one can be found in `/observers` directory
  
 You can find two interfaces in this directory. Here are the interfaces Observable & Observer
 
-####Observable interface + Object that implements it
+### Observable interface + Object that implements it
 ```
 interface Observable {
     observers: Array<Observer>;
@@ -111,7 +111,7 @@ class Player extends GameObject implements Observable {
 }
 ```
 
-####Observer interface + Object that implements it
+###Observer interface + Object that implements it
 ```
 interface Observer {
     notify(): void;
@@ -140,6 +140,13 @@ class Obstacle extends GameObject implements Observer {
     }
 }
 ```
+
+### Others
+Besides the three strategy patterns. I've also implemented the following items:
+- Encapsulation, Composition, Inheritance 
+- Classes, Interfaces and Abstract
+- Namespace, Polymorphism, Enum
+ 
 
 ### UML
 ![RunnerX UML](https://github.com/ohsnapitskenny/RunnerX/blob/master/RunnerX.jpg)
