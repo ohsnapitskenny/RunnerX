@@ -150,9 +150,7 @@ var Driving = (function () {
     Driving.prototype.crashed = function () {
         var _this = this;
         window.removeEventListener("keydown", function (e) { return _this.onKeyDown(e); });
-        window.removeEventListener("keyup", function () {
-            return _this.onKeyUp();
-        });
+        window.removeEventListener("keyup", function () { return _this.onKeyUp(); });
         this.player.behavior = new Crashed(this.player);
     };
     Driving.prototype.getMoveSpeedY = function () {
