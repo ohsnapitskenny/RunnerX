@@ -65,7 +65,6 @@ var Utils;
     var Game = (function () {
         function Game() {
         }
-
         Game.checkCollision = function (instance1, instance2) {
             return (instance1.getX() < instance2.getX() + instance2.getWidth() &&
             instance1.getX() + instance1.getWidth() > instance2.getX() &&
@@ -85,7 +84,6 @@ var Utils;
     var Numbers = (function () {
         function Numbers() {
         }
-
         Numbers.getRandomInt = function (min, max) {
             min = Math.ceil(min);
             max = Math.floor(max);
@@ -98,8 +96,11 @@ var Utils;
 var Crashed = (function () {
     function Crashed(p) {
         this.player = p;
-        var audio = new Audio('assets/dead.mp3');
-        audio.play();
+        this.sound = new Howl({
+            src: ['assets/dead.mp3'],
+            autoplay: true,
+            loop: false
+        });
         this.player.setDeadLuigi();
     }
     Crashed.prototype.execute = function () {
@@ -173,7 +174,6 @@ var GameObject = (function () {
         this.setWidth(width);
         this.setHeight(height);
     }
-
     GameObject.prototype.move = function () {
         this.draw();
     };

@@ -111,7 +111,7 @@ class Player extends GameObject implements Observable {
 }
 ```
 
-###Observer interface + Object that implements it
+### Observer interface + Object that implements it
 ```
 interface Observer {
     notify(): void;
@@ -141,11 +141,39 @@ class Obstacle extends GameObject implements Observer {
 }
 ```
 
+### Game Library (Howler.js)
+`howler.js` is an audio library for the modern web. It defaults to Web Audio API and falls back to HTML5 Audio.
+
+```
+/// <reference types="howler" />
+
+class Crashed implements Behavior {
+ 
+    private sound: Howl;
+
+    constructor(p: Player) {
+        this.player = p;
+ 
+        this.sound = new Howl({
+            src:        ['assets/dead.mp3'],
+            autoplay:   true,
+            loop:       false
+        });
+}
+```
+
+
 ### Others
 Besides the three strategy patterns. I've also implemented the following items:
-- Encapsulation, Composition, Inheritance 
-- Classes, Interfaces and Abstract
-- Namespace, Polymorphism, Enum
+- Encapsulation --> `gameobject.ts`
+- Composition --> `game.ts`
+- Inheritance --> `player.ts` 
+- Classes --> `gameobject.ts`
+- Interfaces --> `behavior.ts`
+- Abstract --> `gameobject.ts`
+- Namespace --> `utils.ts`
+- Polymorphism --> `gameobject.ts`
+- Enum --> `driving.ts`
  
 
 ### UML
