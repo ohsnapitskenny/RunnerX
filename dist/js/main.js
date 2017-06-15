@@ -35,7 +35,7 @@ var Game = (function () {
         if (!this.gameOver) {
             for (var _i = 0, _a = this.obstacles; _i < _a.length; _i++) {
                 var obstacle = _a[_i];
-                if (Utils.checkCollision(obstacle, this.player)) {
+                if (Utils.Game.checkCollision(obstacle, this.player)) {
                     this.endGame();
                 }
                 else {
@@ -60,29 +60,41 @@ var Game = (function () {
 window.addEventListener("load", function () {
     Game.getInstance();
 });
-var Utils = (function () {
-    function Utils() {
-    }
-    Utils.checkCollision = function (instance1, instance2) {
-        return (instance1.getX() < instance2.getX() + instance2.getWidth() &&
+var Utils;
+(function (Utils) {
+    var Game = (function () {
+        function Game() {
+        }
+
+        Game.checkCollision = function (instance1, instance2) {
+            return (instance1.getX() < instance2.getX() + instance2.getWidth() &&
             instance1.getX() + instance1.getWidth() > instance2.getX() &&
             instance1.getY() < instance2.getY() + instance2.getHeight() &&
             instance1.getHeight() + instance1.getY() > instance2.getY());
-    };
-    Utils.getRandomInt = function (min, max) {
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min)) + min;
-    };
-    Utils.removeFromGame = function (go, arr) {
-        go.removeDiv();
-        var i = arr.indexOf(go);
-        if (i != -1) {
-            arr.splice(i, 1);
+        };
+        Game.removeFromGame = function (go, arr) {
+            go.removeDiv();
+            var i = arr.indexOf(go);
+            if (i != -1) {
+                arr.splice(i, 1);
+            }
+        };
+        return Game;
+    }());
+    Utils.Game = Game;
+    var Numbers = (function () {
+        function Numbers() {
         }
-    };
-    return Utils;
-}());
+
+        Numbers.getRandomInt = function (min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min)) + min;
+        };
+        return Numbers;
+    }());
+    Utils.Numbers = Numbers;
+})(Utils || (Utils = {}));
 var Crashed = (function () {
     function Crashed(p) {
         this.player = p;
@@ -96,8 +108,8 @@ var Crashed = (function () {
 }());
 var Keys;
 (function (Keys) {
-    Keys[Keys["ArrowUp"] = 0] = "ArrowUp";
-    Keys[Keys["ArrowDown"] = 1] = "ArrowDown";
+    Keys[Keys["ArrowUp"] = 38] = "ArrowUp";
+    Keys[Keys["ArrowDown"] = 40] = "ArrowDown";
 })(Keys || (Keys = {}));
 var Driving = (function () {
     function Driving(p) {
@@ -125,23 +137,14 @@ var Driving = (function () {
     };
     Driving.prototype.onKeyDown = function (e) {
         switch (e.keyCode) {
-            case 38:
-                this.key = Keys.ArrowUp;
+            case Keys.ArrowUp:
+                this.setMoveSpeedY(-5);
                 break;
-            case 40:
-                this.key = Keys.ArrowDown;
+            case Keys.ArrowDown:
+                this.setMoveSpeedY(5);
                 break;
             default:
                 break;
-        }
-        if (this.key == Keys.ArrowUp) {
-            this.setMoveSpeedY(-5);
-        }
-        else if (this.key == Keys.ArrowDown) {
-            this.setMoveSpeedY(5);
-        }
-        else {
-            return;
         }
     };
     Driving.prototype.onKeyUp = function () {
@@ -170,6 +173,10 @@ var GameObject = (function () {
         this.setWidth(width);
         this.setHeight(height);
     }
+
+    GameObject.prototype.move = function () {
+        this.draw();
+    };
     GameObject.prototype.draw = function () {
         this.div.style.transform = "translate(" + this.getX() + "px," + this.getY() + "px)";
     };
@@ -212,10 +219,10 @@ var Kart = (function (_super) {
 var Obstacle = (function (_super) {
     __extends(Obstacle, _super);
     function Obstacle(parent, p) {
-        var _this = _super.call(this, "obstacle", parent, Utils.getRandomInt(1000, 1200), Obstacle.obstacleY, 93, 99) || this;
+        var _this = _super.call(this, "obstacle", parent, Utils.Numbers.getRandomInt(1000, 1200), Obstacle.obstacleY, 93, 99) || this;
         _this.kart = new Kart(_this.div, 10, 0, 93, 99);
         _this.setPlayer();
-        _this.setSpeed(Utils.getRandomInt(-1, -8));
+        _this.setSpeed(Utils.Numbers.getRandomInt(-1, -8));
         _this.draw();
         Obstacle.obstacleY = Obstacle.obstacleY + 125;
         return _this;
@@ -225,8 +232,8 @@ var Obstacle = (function (_super) {
     };
     Obstacle.prototype.move = function () {
         if (this.getX() < -200) {
-            this.setX(Utils.getRandomInt(800, 1000));
-            this.setSpeed(Utils.getRandomInt(-1, -6));
+            this.setX(Utils.Numbers.getRandomInt(800, 1000));
+            this.setSpeed(Utils.Numbers.getRandomInt(-1, -6));
         }
         else {
             this.x += this.speed;

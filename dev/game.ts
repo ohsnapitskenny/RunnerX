@@ -50,7 +50,7 @@ class Game {
         if (!this.gameOver) {
             // For every obstacle. Check the collision
             for (let obstacle of this.obstacles) {
-                if (Utils.checkCollision(obstacle, this.player)) {
+                if (Utils.Game.checkCollision(obstacle, this.player)) {
                     this.endGame();
                 } else {
                     // If there is no collision just move all obstacles and add score to player

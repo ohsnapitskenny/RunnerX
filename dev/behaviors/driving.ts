@@ -2,14 +2,13 @@
 
 // Constant values for the movement keys
 enum Keys {
-    ArrowUp,
-    ArrowDown
+    ArrowUp = 38,
+    ArrowDown = 40
 }
 
 class Driving implements Behavior {
 
     // Properties
-    private key: Keys;
     private moveSpeedY: number = 0;
 
     // Classes
@@ -53,25 +52,16 @@ class Driving implements Behavior {
     // Check which key is pressed, change the this.key to another Enum Value
     private onKeyDown(e: KeyboardEvent): void {
         switch (e.keyCode) {
-            case 38:
-                this.key = Keys.ArrowUp;
+            case Keys.ArrowUp:
+                this.setMoveSpeedY(-5);
                 break;
-            case 40:
-                this.key = Keys.ArrowDown;
+            case Keys.ArrowDown:
+                this.setMoveSpeedY(5);
                 break;
             default:
                 break;
         }
 
-        // Check which button is pressed.
-        if (this.key == Keys.ArrowUp) {
-            this.setMoveSpeedY(-5);
-        } else if (this.key == Keys.ArrowDown) {
-            this.setMoveSpeedY(5);
-        } else {
-            // If none of them, exit function
-            return;
-        }
     }
 
     // Reset movement when no key is pressed

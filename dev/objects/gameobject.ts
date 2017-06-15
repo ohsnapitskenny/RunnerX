@@ -1,4 +1,4 @@
-class GameObject {
+abstract class GameObject {
 
     //Properties
     protected div: HTMLElement;
@@ -18,6 +18,10 @@ class GameObject {
         //Set size values in object
         this.setWidth(width);
         this.setHeight(height);
+    }
+
+    public move(): void {
+        this.draw();
     }
 
     //Display object on screen

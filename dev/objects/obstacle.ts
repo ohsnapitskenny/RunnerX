@@ -12,12 +12,12 @@ class Obstacle extends GameObject implements Observer {
 
     constructor(parent: HTMLElement, p: Player) {
         // Construct obstacle and add a kart
-        super("obstacle", parent, Utils.getRandomInt(1000, 1200), Obstacle.obstacleY, 93, 99);
+        super("obstacle", parent, Utils.Numbers.getRandomInt(1000, 1200), Obstacle.obstacleY, 93, 99);
         this.kart = new Kart(this.div, 10, 0, 93, 99);
 
         //TODO: Set Sprite so player can choose which character he/she wants to play. Now hardcoded Toad Sprite.
         this.setPlayer();
-        this.setSpeed(Utils.getRandomInt(-1, -8));
+        this.setSpeed(Utils.Numbers.getRandomInt(-1, -8));
 
         this.draw();
 
@@ -33,8 +33,8 @@ class Obstacle extends GameObject implements Observer {
     public move(): void {
         // If Obstacle is moving out of screen. Place it on the right side somewhere between 800,1000, Also give it a random speed. Else just keep driving
         if (this.getX() < -200) {
-            this.setX(Utils.getRandomInt(800, 1000));
-            this.setSpeed(Utils.getRandomInt(-1, -6));
+            this.setX(Utils.Numbers.getRandomInt(800, 1000));
+            this.setSpeed(Utils.Numbers.getRandomInt(-1, -6));
         } else {
             this.x += this.speed;
             this.draw();
