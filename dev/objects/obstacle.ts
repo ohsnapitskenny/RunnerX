@@ -15,7 +15,6 @@ class Obstacle extends GameObject implements Observer {
         super("obstacle", parent, Utils.Numbers.getRandomInt(1000, 1200), Obstacle.obstacleY, 93, 99);
         this.kart = new Kart(this.div, 10, 0, 93, 99);
 
-        //TODO: Set Sprite so player can choose which character he/she wants to play. Now hardcoded Toad Sprite.
         this.setPlayer();
         this.setSpeed(Utils.Numbers.getRandomInt(-1, -8));
 
