@@ -47,6 +47,16 @@ var Game = (function () {
                 }
             }
         }
+        else {
+            var container_1 = document.getElementById("container");
+            var start = document.createElement("start");
+            var scoreText = "Final Score: " + this.player.score;
+            start.innerText = scoreText;
+            document.body.appendChild(start);
+            setTimeout(function () {
+                container_1.remove();
+            }, 2000);
+        }
         requestAnimationFrame(function () { return _this.gameLoop(); });
     };
     Game.prototype.endGame = function () {
@@ -58,7 +68,16 @@ var Game = (function () {
     return Game;
 }());
 window.addEventListener("load", function () {
-    Game.getInstance();
+    var startText = "Runner X";
+    var board = document.getElementsByTagName("score")[0];
+    board.innerHTML = startText;
+    var start = document.createElement("start");
+    start.innerText = "Start Game";
+    document.body.appendChild(start);
+    start.addEventListener("click", function () {
+        start.remove();
+        Game.getInstance();
+    });
 });
 var Utils;
 (function (Utils) {
@@ -67,9 +86,9 @@ var Utils;
         }
         Game.checkCollision = function (instance1, instance2) {
             return (instance1.getX() < instance2.getX() + instance2.getWidth() &&
-            instance1.getX() + instance1.getWidth() > instance2.getX() &&
-            instance1.getY() < instance2.getY() + instance2.getHeight() &&
-            instance1.getHeight() + instance1.getY() > instance2.getY());
+                instance1.getX() + instance1.getWidth() > instance2.getX() &&
+                instance1.getY() < instance2.getY() + instance2.getHeight() &&
+                instance1.getHeight() + instance1.getY() > instance2.getY());
         };
         Game.removeFromGame = function (go, arr) {
             go.removeDiv();

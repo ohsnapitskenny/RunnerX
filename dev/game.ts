@@ -63,6 +63,17 @@ class Game {
                     board.innerHTML = scoreText;
                 }
             }
+        } else {
+            let container = document.getElementById("container");
+
+            let start = document.createElement("start");
+            let scoreText: string = "Final Score: " + this.player.score;
+            start.innerText = scoreText;
+            document.body.appendChild(start);
+
+            setTimeout(function () {
+                container.remove();
+            }, 2000);
         }
         requestAnimationFrame(() => this.gameLoop());
     }
@@ -78,5 +89,17 @@ class Game {
 
 // load game
 window.addEventListener("load", function () {
-    Game.getInstance();
-});
+
+    let startText: string = "Runner X";
+    let board = document.getElementsByTagName("score")[0];
+    board.innerHTML = startText;
+
+    let start = document.createElement("start");
+    start.innerText = "Start Game";
+    document.body.appendChild(start);
+
+    start.addEventListener("click", function () {
+        start.remove();
+        Game.getInstance();
+    });
+}

@@ -35,6 +35,17 @@ score {
     z-index: 1;
 }
 
+start {
+    color: white;
+    font-size: 42px;
+    padding-top: 300px;
+    position: absolute;
+    text-align: center;
+    text-shadow: 2px 2px 0px black;
+    width: 100%;
+    z-index: 1;
+}
+
 grass {
     animation: scrollingBg 8s linear infinite;
     background-image: url(../images/grass.png);
